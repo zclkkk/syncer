@@ -20,7 +20,7 @@ jobs:
         git config --global user.email "${GIT_EMAIL}"
         git clone https://github.com/ACL4SSR/ACL4SSR.git -b master
         cd ACL4SSR
-        sed -i "s#https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master#https://gitea.com/zclkkk/ACL4SSR/raw/branch/master#g" 'grep "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master" -rl ./'
+        grep https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master -rl | xargs -i sed -i s#https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master#https://gitea.com/zclkkk/ACL4SSR/raw/branch/master#g {}
         git commit -a -m "Switch to our mirror"
         git push -f  https://${GIT_USERNAME}:${GIT_PASSWORD}@gitea.com/${GIT_USERNAME}/ACL4SSR.git 
       env:
